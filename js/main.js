@@ -28,7 +28,7 @@ function slideStart() {
 	timer = window.setInterval(() => {
 		n ++	
 		changePic(n % size)
-		console.log(n)
+		console.log(n % size)
 	},1500)
 }
 
