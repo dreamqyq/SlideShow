@@ -1,0 +1,49 @@
+*{margin:0;padding:0;}
+h1{ color:#0078D9; text-align: center; margin:40px 0; }
+.window{ width:1280px; height:720px; margin:10px auto; position:relative; overflow:hidden; }
+.window > .slideBox{
+  position:relative;
+}
+.window > .slideBox > .slidePic{
+  position:absolute;
+  left:100%;
+  top:0;
+  transition:all .3s;
+}
+/* 不同状态下的图片拥有不同的类，JS动态增删元素的类改变其状态 */
+.window > .slideBox > .slidePic.current{
+  left:0;  
+  z-index:1;
+}
+.window > .slideBox > .slidePic.leave{
+  left:-100%;
+}
+.window > .slideBox > .slidePic.enter{
+  left:100%;
+}
+
+
+.window > .dotsBox{
+  display:flex;
+  transition:transform .3s;
+	position: absolute;
+	width: 328px;
+	bottom: 10px;
+	left: 50%;
+	margin-left: -150px;
+  z-index:2;
+}
+.window > .dotsBox > .dot{
+	height: 15px;
+	width: 15px;
+	border-radius: 50%;
+	border: 1px solid #ccc;
+	background: rgba(102,102,102,.7);
+	margin: 0 12px;	
+	transition: transform .5s;	
+	cursor: pointer;
+}
+
+.window > .dotsBox > .dot.active{
+	transform: scale(1.3);
+}
