@@ -1,6 +1,12 @@
 *{margin:0;padding:0;}
 h1{ color:#0078D9; text-align: center; margin:40px 0; }
-.window{ width:1280px; height:720px; margin:10px auto; position:relative; overflow:hidden; }
+.window{ width:1280px;
+  height:720px;
+  margin:10px auto;
+  position:relative; 
+  overflow:hidden;
+  cursor:pointer;
+}
 .window > .slideBox{
   position:relative;
 }

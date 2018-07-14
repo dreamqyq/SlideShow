@@ -1,12 +1,22 @@
 var n = 0
 var $slidePic = $('.slidePic')
+var $dotsBtn = $('.dot')
 var size = $slidePic.length
 var timer = null
 
 init(n)
+
 $('.window').on('mouseover',function(){
-  clearInterval(startSlide())
-  console.log(1)
+  clearInterval(timer)
+})
+$('.window').on('mouseleave',function(){
+  startSlide()
+})
+
+$dotsBtn.on('click',function(e){
+  let index = $(e.currentTarget).index()
+  changePic(index)
+  n = index
 })
 
 function judgeIndex(index){
@@ -20,12 +30,23 @@ function init(index){
 }
 function startSlide(){
   timer = setInterval(() => {
-      $slidePic.eq(judgeIndex(n)).addClass('leave').removeClass('current enter')
-               .one('transitionend',function(e){
-                  $(e.currentTarget).addClass('enter').removeClass('leave')
-               })
-      $slidePic.eq(judgeIndex(n+1)).addClass('current').removeClass('enter leave')
-      n++
-    },3000)
+    changePic(judgeIndex(n))
+    console.log(n)
+    n++
+    },1500)
   return timer
+}
+function changePic(index){
+  $slidePic.eq(index)
+           .addClass('leave')
+           .removeClass('current enter')
+           .one('transitionend',function(e){
+             $(e.currentTarget).addClass('enter')
+                               .removeClass('leave')
+             })
+  $slidePic.eq(index+1)
+           .addClass('current')
+           .removeClass('enter leave')
+  $dotsBtn.eq(index+1).addClass('active')
+         .siblings().removeClass('active')
 }
