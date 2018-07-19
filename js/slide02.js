@@ -32,18 +32,23 @@ $dotsBtn.on('click',function(e){
 })
 $('.nextBtn').on('click',function(){
   changePic(n+1)
-  n ++
+  // n ++
 })
 $('.previousBtn').on('click',function(){
   changePic(n-1)
-  n --
+  // n --
 })
 
 function changePic(index){
-  index = index % size
+  if(index >= size){
+    index = 0
+  }else if(index < 0){
+    index = size-1
+  }
   console.log(`current-index:${index}`)
   $slidePic.css('transform',`translateX(${-1280*index}px)`)
   $dotsBtn.eq(index).addClass('active').siblings().removeClass('active')
-  n ++
+  n = index
+  // n ++
   console.log(`than-index:${n%size}`)
 }
