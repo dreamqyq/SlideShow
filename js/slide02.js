@@ -5,33 +5,22 @@ var $dotsBtn = $('.dot')
 var size = $slidePic.length
 var timer = null
 
-let $picFirst = $slidePic.eq(0).clone(true)
-let $picLast = $slidePic.eq(size-1).clone(true)
-$slideBox.append($picFirst)
-$slideBox.prepend($picLast)
-
-$slideBox.css('transform','translateX(-1280px)')
+init()
+startSlide()
 
 $(document).on('visibilitychange',() => {
   if(document.hidden){
     window.clearInterval(timer)
   }else{
-    timer = setInterval(() => {
-      changePic(n+1)
-    },2000)
+    startSlide()
   }
 })
-timer = setInterval(() => {
-  changePic(n+1)
-},2000)
 
 $('.window').on('mouseover',() => {
   window.clearInterval(timer)
 })
 $('.window').on('mouseleave',() => {
-  timer = setInterval(() => {
-    changePic(n+1)
-  },2000)
+  startSlide()
 })
 
 $dotsBtn.on('click',function(e){
@@ -45,6 +34,19 @@ $('.previousBtn').on('click',function(){
   changePic(n-1)
 })
 
+function init(){
+  let $picFirst = $slidePic.eq(0).clone(true)
+  let $picLast = $slidePic.eq(size-1).clone(true)
+  $slideBox.append($picFirst)
+  $slideBox.prepend($picLast)
+  $slideBox.css('transform','translateX(-1280px)')
+}
+function startSlide(){
+  timer = setInterval(() => {
+    changePic(n+1)
+  },2000)
+  return timer
+}
 function changePic(index){
   if(index >= size){
     index = 0
