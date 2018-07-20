@@ -5,14 +5,14 @@ h1{ color:#0078D9; text-align: center; margin:40px 0; }
   height:720px;
   margin:10px auto;
   position:relative; 
-  /* overflow:hidden`; */
+  overflow:hidden;
   cursor:pointer;
 }
 .window > .slideBox{
   display:flex;
+  transition:all .3s;
 }
 .window > .slideBox > .slidePic{
-  transition:all .3s;
 }
 
 .window > .dotsBox{

@@ -1,8 +1,16 @@
 var n = 0
+var $slideBox = $('.slideBox')
 var $slidePic = $('.slidePic')
 var $dotsBtn = $('.dot')
 var size = $slidePic.length
 var timer = null
+
+let $picFirst = $slidePic.eq(0).clone(true)
+let $picLast = $slidePic.eq(size-1).clone(true)
+$slideBox.append($picFirst)
+$slideBox.prepend($picLast)
+
+$slideBox.css('transform','translateX(-1280px)')
 
 $(document).on('visibilitychange',() => {
   if(document.hidden){
@@ -32,11 +40,9 @@ $dotsBtn.on('click',function(e){
 })
 $('.nextBtn').on('click',function(){
   changePic(n+1)
-  // n ++
 })
 $('.previousBtn').on('click',function(){
   changePic(n-1)
-  // n --
 })
 
 function changePic(index){
@@ -45,10 +51,27 @@ function changePic(index){
   }else if(index < 0){
     index = size-1
   }
-  console.log(`current-index:${index}`)
-  $slidePic.css('transform',`translateX(${-1280*index}px)`)
+  let previousIndex = n % size
+  if(previousIndex === 0 && index === size-1){
+    console.log('0_7')
+    $slideBox.css('transform','translateX(0px)')
+             .one('transitionend',() => {
+               $slideBox.hide().offset()
+               $slideBox.css('transform',`translateX(-${size*1280}px)`)
+                        .show()
+             })
+  }else if(previousIndex === size -1 && index === 0){
+    console.log('7_0')
+    $slideBox.css('transform',`translateX(-${(size+1)*1280}px)`)
+             .one('transitionend',() => {
+               $slideBox.hide().offset()
+               $slideBox.css('transform',`translateX(-1280px)`)
+                        .show()
+             })
+  }else{
+    $slideBox.css('transform',`translatex(${-1280*(index+1)}px)`)
+  } 
   $dotsBtn.eq(index).addClass('active').siblings().removeClass('active')
   n = index
-  // n ++
-  console.log(`than-index:${n%size}`)
+  console.log(n)
 }
