@@ -46,6 +46,3 @@ function changePic(index) {
 			  .siblings('.dot').removeClass('active')
 }
 
-// 遇到的两个bug
-// 第一张图用了3秒才变 解决：slideStart中，n先加1 再改变
-// 点击按钮后，后续轮播没有从点击处开始 解决：点击后设 n = 点击的索引
